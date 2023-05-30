@@ -1,5 +1,7 @@
-import logo from './logo.svg';
+import CopyrightIcon from '@mui/icons-material/Copyright';
+import CopyrightSharpIcon from '@mui/icons-material/CopyrightSharp';
 import './App.css';
+import FormApp from './components/formapp';
 
 function App() {
   return (
@@ -21,12 +23,11 @@ function App() {
       </header>
       
       <main className="container">
-        <h1>Da Form</h1>
-        
+        <FormApp />        
       </main>
       <div className="App-footer">
         <div className="footer-info">
-          Powered By React!
+          <CopyrightSharpIcon fontSize='small' style={{marginRight: 6}} />  Powered By React!
         </div>
       </div>
     </div>
