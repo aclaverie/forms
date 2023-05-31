@@ -54,11 +54,22 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
+
+.app-notification{
+  background-color: #eeeeee;
+  min-height: 64px;
+  margin-bottom: 24px;
+  padding: 24px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
 .app-box{
   width: 100%;
+  color: #44378E;
 }
 .personal{
-  
+  color: #44378E;
 }
 
 fieldset {
