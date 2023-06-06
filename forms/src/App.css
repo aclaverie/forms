@@ -57,6 +57,7 @@
 
 .app-notification{
   background-color: #eeeeee;
+  border: 1px solid #000000;
   min-height: 64px;
   margin-bottom: 24px;
   padding: 24px 24px;
