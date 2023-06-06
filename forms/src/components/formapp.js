@@ -13,45 +13,42 @@ function FormApp() {
         firstName   : "",
         lastName    : "",
         email       : "",
-        walk        : false,
+        walk        : true,
         bike        : false,
         car         : false,
         boat        : false,
         train       : false,
-        framework   : "react",
+        framework   : "",
         concerns    : "",
         feedback    : "",
     });
-    const [transport, setTransport] = useState([]);
-
-    function handleCheck(e) {
-        console.log([e.target.name]+": "+e.target.value)
-        // setTransport(prevTransport => {
-        //     const index = prevTransport.indexOf(event.target.value);
-        //     console.log(index);
-        //     return [...prevTransport]
-        // })
-    }
 
     function handledChange(e){
-        console.log([e.target.name]+": "+e.target.value)
+        const {name, value, type, checked} = e.target;
+        console.log(name+": "+((type === "checkbox") ? checked : value))
         setFormData(prevFormData => {
             return{
                 ...prevFormData,
-                [e.target.name]: e.target.value
+                [name]: type === "checkbox" ? checked : value
             }
-        })
+        });
     }
     
    
     const filledForm =
             <h6>
-                <p>Name: {formData.firstName +" "+ formData.lastName}</p>
-                <p>Email: {formData.email}</p>
-                <p>Walk: {formData.walk} Bike: {formData.bike} Car: {formData.car} Boat: {formData.boat} Train: {formData.train}</p>
-                <p>Framework: {formData.framework}</p>
-                <p>Concerns: {formData.concerns}</p>
-                <p>Feedback: {formData.feedback}</p>
+                <p align="left">Name: {formData.firstName +" "+ formData.lastName}</p>
+                <p align="left">Email: {formData.email}</p>
+                <p align="left">
+                    Walk: {(formData.walk)?"Yes":"No"}<br />
+                    Bike: {formData.bike?"Yes":"No"} <br />
+                    Car: {formData.car?"Yes":"No"} <br />
+                    Boat: {formData.boat?"Yes":"No"} <br />
+                    Train: {formData.train?"Yes":"No"}<br />
+                </p>
+                <p align="left">Framework: {formData.framework}</p>
+                <p align="left">Concerns: {formData.concerns}</p>
+                <p align="left">Feedback: {formData.feedback}</p>
             </h6>
                 
     return (
@@ -74,31 +71,32 @@ function FormApp() {
                             <FormControlLabel
                             control={<Checkbox />}
                             onChange={handledChange}
-                            value={transport.walk}  
+                            checked={formData.walk}  
                             label='Walk'
-                            name='walk' />
+                            name="walk"
+                            id="walk" />
                             <FormControlLabel
                             control={<Checkbox />}
                             onChange={handledChange}
-                            value={transport.bike}
+                            checked={formData.bike}
                             label='Bike'
                             name="bike" />
                             <FormControlLabel
                             control={<Checkbox />}
-                            value={transport.car}
+                            checked={formData.car}
                             onChange={handledChange}
                             label='Car' 
                             name="car" />
                             <FormControlLabel
                             control={<Checkbox />}
                             onChange={handledChange}  
-                            value={transport.boat}    
+                            checked={formData.boat}    
                             label='Boat'
                             name="boat" />
                             <FormControlLabel
                             control={<Checkbox />}
                             onChange={handledChange}  
-                            value={transport.train}   
+                            checked={formData.train}   
                             label='Train' 
                             name="train" />
                         </FormGroup>
