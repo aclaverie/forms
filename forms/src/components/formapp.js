@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import {Input, Checkbox, RadioGroup, Radio } from '@mui/material';
+import {Input, Checkbox, RadioGroup, Radio, TextField } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 
 function FormApp() {
@@ -22,7 +24,7 @@ function FormApp() {
         concerns    : "",
         feedback    : "",
     });
-
+    
     function handledChange(e){
         const {name, value, type, checked} = e.target;
         console.log(name+": "+((type === "checkbox") ? checked : value))
@@ -33,8 +35,7 @@ function FormApp() {
             }
         });
     }
-    
-   
+       
     const filledForm =
             <h6>
                 <p align="left">Name: {formData.firstName +" "+ formData.lastName}</p>
@@ -105,24 +106,31 @@ function FormApp() {
                 <fieldset className='framework'>
                     <legend>Framework:</legend>
                     <FormControl sx={{ m: 1 }}>
-                        <RadioGroup row name='framework' value={formData.framework} onChange={handledChange} >
-                            <FormControlLabel control={<Radio />} value='react'   label='React JS'   />
-                            <FormControlLabel control={<Radio />} value='vue'     label='Vue'        />
-                            <FormControlLabel control={<Radio />} value='angular' label='Angular JS' />
+                        <RadioGroup row  >
+                            <FormControlLabel control={<Radio />} name='framework' value='react'   checked={formData.framework === "react"} onChange={handledChange} label='React JS'   />
+                            <FormControlLabel control={<Radio />} name='framework' value='vue'     checked={formData.framework === "vue"} onChange={handledChange} label='Vue'        />
+                            <FormControlLabel control={<Radio />} name='framework' value='angular' checked={formData.framework === "angular"} onChange={handledChange} label='Angular JS' />
                         </RadioGroup>
                     </FormControl>               
                 </fieldset>
                 <fieldset className='concerns'>
                     <legend>Concerns:</legend>
-                    {/* <FormControl sx={{ m: 1 }}> */}
-                        <TextareaAutosize
-                        onChange={handledChange}
-                        placeholder="Share your concerns"
-                        minRows={"4"} cols="100" 
-                        defaultValue={formData.concerns} 
-                        name="concerns"  />                        
-                    {/* </FormControl>      */}
-                </fieldset>
+                    <FormControl sx={{ m: 1, minWidth: 250 }} variant="standard">
+                        <InputLabel id="concerns-label">Concerns</InputLabel>
+                        <Select 
+                            labelId='concerns-label'
+                            id='concerns'
+                            value={formData.concerns}
+                            onChange={handledChange}
+                            name="concerns"
+                        >
+                            <MenuItem  value='funding'    >Funding</MenuItem>
+                            <MenuItem  value='delivery'  >Delivery</MenuItem>
+                            <MenuItem  value='anxiety'    >Anxiety</MenuItem>
+                            <MenuItem  value='skill'      >Skill</MenuItem>
+                        </Select>
+                    </FormControl>                    
+                 </fieldset> 
                 <fieldset className='feedback'>
                     <legend>Feedback:</legend>
                     <FormControl sx={{ m: 1 }}>
@@ -134,7 +142,9 @@ function FormApp() {
                         name="feedback"  />                        
                     </FormControl>
                 </fieldset>
+                
             </form>
+           
         </div>
     )
 }
