@@ -39,6 +39,8 @@ function FormApp() {
     function handleSubmit(e){
         e.preventDefault()
         console.log(formData)
+        //You can always pass the formData Object to an API connected to a database 
+        //or seralize to a text file and save.
     }
        
     const filledForm =
