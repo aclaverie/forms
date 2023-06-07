@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {Input, Checkbox, RadioGroup, Radio, TextField } from '@mui/material';
+import {Input, Checkbox, RadioGroup, Radio, Button } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
@@ -27,7 +27,7 @@ function FormApp() {
     
     function handledChange(e){
         const {name, value, type, checked} = e.target;
-        console.log(name+": "+((type === "checkbox") ? checked : value))
+        // console.log(name+": "+((type === "checkbox") ? checked : value))
         setFormData(prevFormData => {
             return{
                 ...prevFormData,
@@ -35,29 +35,33 @@ function FormApp() {
             }
         });
     }
+
+    function handleSubmit(e){
+        e.preventDefault()
+        console.log(formData)
+    }
        
     const filledForm =
-            <h6>
-                <p align="left">Name: {formData.firstName +" "+ formData.lastName}</p>
-                <p align="left">Email: {formData.email}</p>
-                <p align="left">
-                    Walk: {(formData.walk)?"Yes":"No"}<br />
-                    Bike: {formData.bike?"Yes":"No"} <br />
-                    Car: {formData.car?"Yes":"No"} <br />
-                    Boat: {formData.boat?"Yes":"No"} <br />
-                    Train: {formData.train?"Yes":"No"}<br />
+            <h3>
+                <p align="left">Name: {formData.firstName +" "+ formData.lastName}<br />
+                Email: {formData.email}<br />
+                Walk: {(formData.walk)?"Yes":"No"}<br />
+                Bike: {formData.bike?"Yes":"No"} <br />
+                Car: {formData.car?"Yes":"No"} <br />
+                Boat: {formData.boat?"Yes":"No"} <br />
+                Train: {formData.train?"Yes":"No"}<br />
+                Framework: {formData.framework}<br />
+                Concerns: {formData.concerns}<br />
+                Feedback: {formData.feedback}<br />
                 </p>
-                <p align="left">Framework: {formData.framework}</p>
-                <p align="left">Concerns: {formData.concerns}</p>
-                <p align="left">Feedback: {formData.feedback}</p>
-            </h6>
+            </h3>
                 
     return (
         <div className="app-box">
             <div className="app-notification">
                 {filledForm}
             </div>
-            <form>
+            <form >
                 <fieldset className='personal'>
                     <legend>Personal:</legend>
                     <Input onChange={handledChange} placeholder="First Name" variant="outlined" name="firstName" defaultValue={formData.firstName} />
@@ -142,7 +146,7 @@ function FormApp() {
                         name="feedback"  />                        
                     </FormControl>
                 </fieldset>
-                
+                <Button variant="outlined" onClick={handleSubmit}> Submit </Button>
             </form>
            
         </div>
